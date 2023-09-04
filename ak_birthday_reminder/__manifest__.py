@@ -16,6 +16,7 @@
         'views/email_template.xml',
         'views/customer_birthday_reminder.xml',
     ],
+    'images': ['static/description/banner.jpg'],
     'installable': True,
     'application': True,
     'auto_install': False,
