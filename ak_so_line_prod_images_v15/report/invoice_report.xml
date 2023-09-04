@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<!-- Inherit account move document added product image -->
+	<template id='custom_inherit_report_invoice_document' inherit_id='account.report_invoice_document'>
+		<xpath expr="//table/thead/tr/th[@name='th_description']" position="after">
+			<t t-foreach="o.invoice_line_ids" t-as="line">
+				<t t-if="line.is_image">
+					<th name="th_image">Product Image</th>
+				</t>
+			</t>
+		</xpath>
+		<xpath expr="//table/tbody/t/tr/t/td[@name='account_invoice_line_name']" position="after">
+			<t t-if='line.is_image'>
+	      		<td name="td_product_image">
+	    			<span t-field="line.product_image" t-options='{"widget": "image", "style":"max-width: 100px; max-height: 100px"}'/>
+  				</td>
+			</t>
+		</xpath>
+	</template>
+</odoo>	
