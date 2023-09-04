@@ -1,7 +1,7 @@
 # Copyright 2018 Akili Systems Pvt. Ltd. India
 
 {
-    'name' : 'SO/Invoice Reports with Product Image',
+    'name' : 'Product Image in Sale and invoice report',
     "summary": "Show product images on Sale Order Line as well on sale/invoice reports",
     "version": "15.0.1.0.0",
     'category': 'Sales',
