@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "Sale Double Validation",
+    'name': "Sale Order Approval",
 
     'summary': """
         With the help of this module your sale order is goes into the approve state if the subtotal is equal and higher than the 
