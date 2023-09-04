@@ -1,0 +1,91 @@
+<odoo>
+  <data>
+    <!-- explicit backup list view -->
+
+    <record model="ir.ui.view" id="ak_backup_odoo_database_list_view">
+      <field name="name">ak_backup_odoo_database_list</field>
+      <field name="model">backup.database</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="frequency_interval"/>
+          <field name="state"/>
+          <field name="sequence" widget="handle"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="ak_backup_odoo_database_form_view">
+      <field name="name">ak_backup_odoo_database_form</field>
+      <field name="model">backup.database</field>
+      <field name="arch" type="xml">
+        <form>
+          <header>
+            <button
+                name="active"
+                string="Active"
+                type="object"
+                class="btn-primary"
+                attrs="{'invisible': [('state','!=','draft')]}"/>
+
+            <button
+                name="inactive"
+                string="Inactive"
+                type="object"
+                class="btn-primary"
+                attrs="{'invisible': [('state','!=','active')]}"/>
+
+            <button
+                name="draft"
+                string="Reset to Draft"
+                type="object"
+                class="btn-primary"
+                attrs="{'invisible': [('state','!=','inactive')]}"/>
+
+            <field name="state" widget="statusbar"/>
+          </header>
+          <sheet>
+            <div class="oe_title">
+              <h1>
+                <field name="name" placeholder="e.g. Odoo Database Backup" required="1"/>
+              </h1>
+            </div>
+            <group>
+              <group>
+                <field name="frequency" required="1"/>
+                <field name="frequency_interval" required="1"/>
+                <field name="backup_datetime" required="1"/>
+                <field name="storage_path" required="1"/>
+              </group>
+            </group>
+            <notebook>
+              <page string="Backup details">
+                <field name="db_backup_details_ids">
+                  <tree create="false">
+                    <field name="backup_datetime"/>
+                    <field name="file_name"/>
+                    <button name="get_zip_backup" string="Download" type="object" class="btn-primary"/>
+                    <field name="sequence" widget="handle"/>
+                  </tree>
+                </field>
+              </page>
+            </notebook>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+
+    <!-- actions opening views of database backup -->
+
+    <record model="ir.actions.act_window" id="ak_backup_odoo_database_action">
+      <field name="name">Backup</field>
+      <field name="res_model">backup.database</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <!-- Top menu item -->
+    <menuitem name="Backup Database" parent="base.menu_users" id="menu_database_backup" action="ak_backup_odoo_database_action" sequence="99"/>
+  </data>
+</odoo>
