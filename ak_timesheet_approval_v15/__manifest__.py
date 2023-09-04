@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "Time sheet Validation",
+    'name': "Timesheet Validation",
 
     'summary': """
         Manager can approve and reject the time sheet of an employee.""",
