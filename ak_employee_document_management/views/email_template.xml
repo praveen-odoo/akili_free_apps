@@ -1,0 +1,27 @@
+<odoo>
+	<data noupdate="1">
+		<record id="documents_email_template" model="mail.template">
+			<field name="name">Document Expiry Reminder</field>
+			<field name="model_id" ref="model_employee_documents_management"/>
+			<field name="subject">Document Expiry Reminder: {{ object.employee_id.name }}</field>
+			<field name="partner_to">{{ object.id }}</field>
+			<field name="email_to">{{ object.employee_id.work_email }}</field>
+			<field name="body_html" type="html">
+				<div>
+					<p>Hi <t t-out="object.employee_id.name"/></p>
+					<p>Your <t t-out="object.name"/>
+						<t t-if="object.valid_status == 'exp_today'">
+							is going to be expired tody. Renew it before you loose our support.
+						</t>
+						<t t-else="object.valid_status == 'expired'">
+							is expired. Please renew it until you don't have any support of us.	
+						</t>
+					</p>
+					<p>Thanks and Regards<br/>
+						<t t-out="object.employee_id.address_id.name"/>
+					</p>
+				</div>
+			</field>
+		</record>
+	</data>
+</odoo>

@@ -1,0 +1,21 @@
+<odoo>
+    <data noupdate="0">
+        <record id="custom_email_template" model="mail.template">
+            <field name="name">Birthday Reminder</field>
+            <field name="model_id" ref="model_res_partner"/>
+            <field name="subject">Happy Birthday: {{ object.name }}</field>
+            <field name="partner_to">{{ object.id }}</field>
+            <field name="body_html" type="html">
+    
+           <div>
+                <div>
+                    <p>Happy birthday </p><t t-out="object.name"/>
+                    <p>Wishing you a day filled with love, laughter and all your favorite things. May your future be even brighter and filled with new opportunities, success and adventures. Enjoy your special day!
+                    </p><br/>
+                    <p>Best Regards,</p><t t-out="object.company_id.name"/>                    
+                </div>
+            </div>
+        </field>
+       </record>
+   </data>
+</odoo>
