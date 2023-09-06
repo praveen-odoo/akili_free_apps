@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<record id="employee_documents_action_button" model="ir.actions.act_window">
+		<field name="name">Employee Documents</field>
+        <field name="res_model">employee.documents.management</field>
+        <field name="view_mode">form</field>
+	</record>
+	
+	<record id="employee_documents_button_view" model="ir.ui.view">
+		<field name="name">employee.documents.button.view</field>
+		<field name="model">hr.employee</field>
+		<field name="inherit_id" ref="hr.view_employee_form"/>
+		<field name="arch" type="xml">
+			<xpath expr="//form/sheet/div[@name='button_box']" position="inside">
+				<button name="%(ak_employee_document_management.employee_documents_action_button)d" type="action" class="oe_stat_button" icon="fa-globe icon" context="{'default_employee_id': active_id}">
+		            <div class="o_field_widget o_stat_info">
+		                <span class="o_stat_text">Employee</span>
+		                <span class="o_stat_text">Documents</span>
+		            </div>
+		        </button>
+			</xpath>
+			<xpath expr="//form/sheet/notebook/page[@name='hr_settings']" position="after">
+				<page string="Issued Documents">
+					<field name="document_ids" readonly="1"/>
+				</page>
+			</xpath>
+		</field>
+	</record>
+
+	<record id="employee_documents_tree_view" model="ir.ui.view">
+		<field name="name">employee.documents.tree_view</field>
+		<field name="model">employee.documents.management</field>
+		<field name="arch" type="xml">
+			<tree string="Emloyee Documents Tree View">
+				<field name="employee_id"/>
+				<field name="name"/>
+				<field name="document_id"/>
+				<field name="expiry_date" widget="date"/>
+				<field name="valid_status"/>
+			</tree>
+		</field>
+	</record>
+
+	<record id="employee_documents_form_view" model="ir.ui.view">
+		<field name="name">employee.documents.form.view</field>
+		<field name="model">employee.documents.management</field>
+		<field name="arch" type="xml">
+			<form string="Emloyee Documents Tree View">
+				<header>
+					<button name="validate_document" string="Validate Document" type="object" class="btn btn-primary"/>
+				</header>
+				<sheet>
+					<group>
+						<group>
+							<field name="name"/>
+							<field name="document_id"/>
+							<field name="document_type"/>
+							<field name="attachment"/>
+						</group>
+						<group>
+							<field name="employee_id"/>
+							<field name="issue_date" widget="date"/>
+							<field name="not_expired"/>
+							<field name="expiry_date" widget="date" attrs="{'invisible': [('not_expired', '=', True)]}"/>
+							<field name="valid_status"/>
+						</group>
+					</group>
+					<notebook>
+						<page string="Description">
+							<field name="description" nolabel="1" placeholder="Please enter the description of the document"/>
+						</page>
+					</notebook>
+				</sheet>
+			</form>
+		</field>
+	</record>
+
+	<record id="employee_documents_action" model="ir.actions.act_window">
+		<field name="name">Employee Documents</field>
+        <field name="res_model">employee.documents.management</field>
+        <field name="view_mode">tree,form</field>
+	</record>
+
+	<menuitem name="Documents" id="employee_document_menuitem" parent="hr.menu_human_resources_configuration" action="employee_documents_action"/>
+</odoo> 
