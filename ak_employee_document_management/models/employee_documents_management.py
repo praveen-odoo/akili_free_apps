@@ -12,7 +12,7 @@ class EmployeeDocumentsManagement(models.Model):
     attachment = fields.Binary('Attachment')
     issue_date = fields.Datetime('Issue Date')
     not_expired = fields.Boolean('Lifetime Validity', default=False)
-    expiry_date = fields.Datetime('Expiry Date')
+    expiry_date = fields.Datetime('Expiry Date',required=True)
     description = fields.Text('description')
     valid_status = fields.Selection([
             ('valid', 'Valid'), ('exp_today', 'Expired Today'), ('expired', 'Expired')
